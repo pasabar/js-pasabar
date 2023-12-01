@@ -2,7 +2,7 @@ import { setCookieWithExpireHour } from 'https://jscroot.github.io/cookie/croot.
 
 //token
 export function getTokenFromAPI() {
-  const tokenUrl = "https://asia-southeast2-pasabar.cloudfunctions.net/loginpasabar";
+  const tokenUrl = "https://asia-southeast2-pasabar.cloudfunctions.net/Admin-Login";
   fetch(tokenUrl)
     .then(response => response.json())
     .then(tokenData => {
@@ -14,13 +14,13 @@ export function getTokenFromAPI() {
     .catch(error => console.error('Gagal mengambil token:', error));
 }
 export function GetDataForm(){
-            const username = document.querySelector("#username").value;
+            const username = document.querySelector("#email").value;
             const password = document.querySelector("#password").value;
             const role = document.querySelector("#role").value;
             console.log(password)
 
             const data = {
-                username: username,
+                username: email,
                 password: password,
                 role: role
             };
@@ -28,22 +28,18 @@ export function GetDataForm(){
 }
 //login
 export function PostLogin() {
-  const username = document.getElementById("username").value;
+  const username = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   const role = document.getElementById("role").value;
 
   const data = {
-    username: username,
+    username: email,
     password: password,
     role: role
   };
   return data;
 }
 
-export function AlertPost(value){
-    alert(value.message + "\nRegistrasi Berhasil")
-    window.location.href= "login.html"
-}
 
 
 function ResponsePostLogin(response) {
@@ -51,9 +47,17 @@ function ResponsePostLogin(response) {
     console.log('Token User:', response.token);
     setCookieWithExpireHour('user_token', response.token, 2);
     window.location.href = 'https://pasabar.github.io/Dashboard/';
-    alert("Selamat Datang")
+    Swal.fire({
+      icon: 'success',
+      title: 'Login Successful',
+      text: 'You have successfully logged in!',
+    });
   } else {
-    alert('Login gagal. Silakan coba lagi.');
+    Swal.fire({
+      icon: 'error',
+      title: 'Login Failed',
+      text: 'Invalid email or password. Please try again.',
+    });
   }
 }
 
