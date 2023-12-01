@@ -14,13 +14,13 @@ export function getTokenFromAPI() {
     .catch(error => console.error('Gagal mengambil token:', error));
 }
 export function GetDataForm(){
-            const username = document.querySelector("#email").value;
+            const email = document.querySelector("#email").value;
             const password = document.querySelector("#password").value;
             const role = document.querySelector("#role").value;
             console.log(password)
 
             const data = {
-                username: email,
+                email: email,
                 password: password,
                 role: role
             };
@@ -28,12 +28,12 @@ export function GetDataForm(){
 }
 //login
 export function PostLogin() {
-  const username = document.getElementById("email").value;
+  const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   const role = document.getElementById("role").value;
 
   const data = {
-    username: email,
+    email: email,
     password: password,
     role: role
   };
