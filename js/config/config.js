@@ -1,6 +1,5 @@
 import { setCookieWithExpireHour } from "https://jscroot.github.io/cookie/croot.js";
-import Swal from 'sweetalert2/src/sweetalert2.js';
-
+import Swal from "sweetalert2";
 //token
 export function getTokenFromAPI() {
   const tokenUrl =
@@ -47,19 +46,19 @@ function ResponsePostLogin(response) {
     // console.log("Token User:", response.token);
     setCookieWithExpireHour("Login", response.token, 2);
     window.location.href = "https://pasabar.my.id/Dashboard/";
-    alert("Selamat Datang")
-    Swal.fire({
-      icon: "success",
-      title: "Login Successful",
-      text: "You have successfully logged in!",
-    });
+    // alert("Selamat Datang");
+    new Noty({
+      type: "success",
+      text: "Selamat Datang! Anda berhasil login.",
+      timeout: 3000, // Waktu tampilan notifikasi dalam milidetik
+    }).show();
   } else {
-    alert('Login gagal. Silakan coba lagi.');
-    Swal.fire({
-      icon: "error",
-      title: "Login Failed",
-      text: "Invalid email or password. Please try again.",
-    });
+    // alert("Login gagal. Silakan coba lagi.");
+    new Noty({
+      type: "error",
+      text: "Login gagal. Email atau password tidak valid. Silakan coba lagi.",
+      timeout: 3000, // Waktu tampilan notifikasi dalam milidetik
+    }).show();
   }
 }
 
