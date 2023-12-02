@@ -1,4 +1,5 @@
 import { setCookieWithExpireHour } from "https://jscroot.github.io/cookie/croot.js";
+import Swal from 'sweetalert2';
 
 //token
 export function getTokenFromAPI() {
@@ -43,15 +44,17 @@ export function PostLogin() {
 
 function ResponsePostLogin(response) {
   if (response && response.token) {
-    console.log("Token User:", response.token);
-    setCookieWithExpireHour("user_token", response.token, 2);
+    // console.log("Token User:", response.token);
+    setCookieWithExpireHour("Login", response.token, 2);
     window.location.href = "https://pasabar.my.id/Dashboard/";
+    alert("Selamat Datang")
     Swal.fire({
       icon: "success",
       title: "Login Successful",
       text: "You have successfully logged in!",
     });
   } else {
+    alert('Login gagal. Silakan coba lagi.');
     Swal.fire({
       icon: "error",
       title: "Login Failed",
