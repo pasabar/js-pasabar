@@ -1,6 +1,7 @@
 import { setCookieWithExpireHour } from "https://jscroot.github.io/cookie/croot.js";
-import Swal from "sweetalert2";
-//token
+
+
+// Token
 export function getTokenFromAPI() {
   const tokenUrl =
     "https://asia-southeast2-pasabar.cloudfunctions.net/Admin-Login";
@@ -14,6 +15,7 @@ export function getTokenFromAPI() {
     })
     .catch((error) => console.error("Gagal mengambil token:", error));
 }
+
 export function GetDataForm() {
   const email = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
@@ -27,7 +29,8 @@ export function GetDataForm() {
   };
   return data;
 }
-//login
+
+// Login
 export function PostLogin() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -41,30 +44,31 @@ export function PostLogin() {
   return data;
 }
 
+// Response Post Login
 function ResponsePostLogin(response) {
   if (response && response.token) {
     // console.log("Token User:", response.token);
     setCookieWithExpireHour("Login", response.token, 2);
     window.location.href = "https://pasabar.my.id/Dashboard/";
-    // alert("Selamat Datang");
-    new Noty({
-      type: "success",
-      text: "Selamat Datang! Anda berhasil login.",
-      timeout: 3000, // Waktu tampilan notifikasi dalam milidetik
-    }).show();
+    Swal.fire({
+              icon: 'success',
+              title: 'Login Successful',
+              text: 'You have successfully logged in!',
+            });
   } else {
-    // alert("Login gagal. Silakan coba lagi.");
-    new Noty({
-      type: "error",
-      text: "Login gagal. Email atau password tidak valid. Silakan coba lagi.",
-      timeout: 3000, // Waktu tampilan notifikasi dalam milidetik
-    }).show();
+    Swal.fire({
+              icon: 'error',
+              title: 'Login Failed',
+              text: 'Invalid email or password. Please try again.',
+            });
   }
 }
 
 export function ResponsePost(result) {
   AlertPost(result);
 }
+
 export function ResponseLogin(result) {
   ResponsePostLogin(result);
 }
+
