@@ -1,5 +1,5 @@
 import { setCookieWithExpireHour } from "https://jscroot.github.io/cookie/croot.js";
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2/src/sweetalert2.js';
 
 //token
 export function getTokenFromAPI() {
