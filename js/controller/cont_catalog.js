@@ -1,7 +1,7 @@
 const getTokenFromCookies = (cookieName) => {
-  const cookies = document.cookie.split(";");
+  const cookies = document.cookie.split(';');
   for (const cookie of cookies) {
-    const [name, value] = cookie.trim().split("=");
+    const [name, value] = cookie.trim().split('=');
     if (name === cookieName) {
       return value;
     }
@@ -9,66 +9,48 @@ const getTokenFromCookies = (cookieName) => {
   return null;
 };
 
-// Import modul atau library yang diperlukan di sini
-// ...
-
-// Fungsi untuk mendapatkan semua katalog
 const getAllCatalog = async () => {
+  const token = getTokenFromCookies('Login');
+
+  if (!token) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Authentication Error',
+      text: 'You are not logged in.',
+    }).then(() => {
+      window.location.href = 'pages/signin.html'; 
+    });
+    return;
+  }
+
+  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/GetAll-dataCatalog';
+
+  const myHeaders = new Headers();
+  myHeaders.append('Login', token);
+
+  const requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow',
+  };
+
   try {
-    // Mendapatkan token dari cookies
-    const token = getTokenFromCookies("Login");
-
-    // Memeriksa apakah token ada
-    if (!token) {
-      console.error("Anda belum login.");
-      return;
-    }
-
-    // URL target
-    const targetURL =
-      "https://asia-southeast2-pasabar.cloudfunctions.net/GetAll-dataCatalog";
-
-    // Mengatur header untuk permintaan
-    const myHeaders = new Headers();
-    myHeaders.append("Login", token);
-
-    // Opsi permintaan
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    // Melakukan permintaan GET
     const response = await fetch(targetURL, requestOptions);
-
-    // Memeriksa apakah respons OK
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    // Mendapatkan data dari respons JSON
     const data = await response.json();
 
-    // Memeriksa status respons
     if (data.status === 200) {
-      // Memanggil fungsi untuk menangani data katalog
-      displaycatalogData(data.data, "catalogdataBody");
+      displayCatalogData(data.data, 'CatalogDataBody');
     } else {
-      // Menampilkan pesan kesalahan jika status bukan 200
-      // console.log(
-      //   "Data successfully retrieved in getAllCatalog:",
-      //   data.message
-      // );
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: data.message,
+      });
     }
   } catch (error) {
-    // Menangkap dan menampilkan kesalahan jika ada
-    console.error("Error in getAllCatalog:", error);
+    console.error('Error:', error);
   }
 };
-
-// Panggil fungsi untuk mendapatkan semua katalog
-getAllCatalog();
 
 const searchcatalog = async () => {
   const nomoridInput = document.getElementById("nomoridInput").value;
@@ -103,7 +85,7 @@ const searchcatalog = async () => {
     const data = await response.json();
 
     if (data.status === 200) {
-      displaycatalogData([data.data], "catalogdataBody");
+      displayCatalogData([data.data], "catalogdataBody");
     } else {
       alert(data.message);
     }
@@ -172,7 +154,7 @@ const deletecatalogHandler = (nomorid) => {
   }
 };
 
-const displaycatalogData = (catalog, tableBodyId) => {
+const displayCatalogData = (catalog, tableBodyId) => {
   const catalogdataBody = document.getElementById(tableBodyId);
 
   catalogdataBody.innerHTML = "";
