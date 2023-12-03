@@ -176,29 +176,27 @@ const displaycatalogData = (catalog, tableBodyId) => {
     catalog.forEach((ctl) => {
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
-      
-      <td class="px-4 py-3">
-      <div class="flex items-center text-sm">
-        <div>
-          <p class="font-semibold">${ctl.nomorid}</p>
-        </div>
-      </div>
-    </td>
-    <td class="px-4 py-3 text-sm">
-      <p class="font-semibold">${ctl.title}</p>
-    </td>
-    <td class="px-4 py-3 text-sm">
-      <p class="font-semibold">${ctl.description}</p>
-    </td>
-    <td class="px-4 py-3 text-sm">
-      ${ctl.image}
-    </td>
-    <td class="px-4 py-3 text-xs">
-      <span
-        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-        ${ctl.status["divName"]}
-      </span>
-    </td>
+        <td class="px-4 py-3">
+          <div class="flex items-center text-sm">
+            <div>
+              <p class="font-semibold">${ctl.nomorid}</p>
+            </div>
+          </div>
+        </td>
+        <td class="px-4 py-3 text-sm">
+          <p class="font-semibold">${ctl.title}</p>
+        </td>
+        <td class="px-4 py-3 text-sm">
+          <p class="font-semibold">${ctl.description}</p>
+        </td>
+        <td class="px-4 py-3 text-sm">
+          ${ctl.image}
+        </td>
+        <td class="px-4 py-3 text-xs">
+          <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+            ${ctl.status}
+          </span>
+        </td>
         <td class="px-4 py-3">
           <a href="#" class="edit-link" data-ctlloyeeid="${ctl.nomorid}">Edit</a>
           <a href="#" class="delete-link" data-ctlloyeeid="${ctl.nomorid}">Delete</a>
@@ -208,7 +206,7 @@ const displaycatalogData = (catalog, tableBodyId) => {
       catalogBody.appendChild(newRow);
     });
   } else {
-    catalogBody.innerHTML = `<tr><td colspan="9">No user data found.</td></tr>`;
+    catalogBody.innerHTML = `<tr><td colspan="6">No catalog data found.</td></tr>`;
   }
 };
 
