@@ -103,7 +103,7 @@ const searchcatalog = async () => {
     const data = await response.json();
 
     if (data.status === 200) {
-      displaycatalog([data.data], "catalogBody");
+      displaycatalogData([data.data], "catalogdataBody");
     } else {
       alert(data.message);
     }
@@ -171,9 +171,9 @@ const deletecatalogHandler = (nomorid) => {
 };
 
 const displaycatalogData = (catalog, tableBodyId) => {
-  const catalogBody = document.getElementById(tableBodyId);
+  const catalogdataBody = document.getElementById(tableBodyId);
 
-  catalogBody.innerHTML = "";
+  catalogdataBody.innerHTML = "";
 
   if (catalog && catalog.length > 0) {
     catalog.forEach((ctl) => {
@@ -206,10 +206,10 @@ const displaycatalogData = (catalog, tableBodyId) => {
         </td>
       `;
 
-      catalogBody.appendChild(newRow);
+      catalogdataBody.appendChild(newRow);
     });
   } else {
-    catalogBody.innerHTML = `<tr><td colspan="6">No catalog data found.</td></tr>`;
+    catalogdataBody.innerHTML = `<tr><td colspan="6">No catalog data found.</td></tr>`;
   }
 };
 
