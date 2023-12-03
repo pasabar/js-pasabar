@@ -56,7 +56,10 @@ const getAllCatalog = async () => {
       displaycatalogData(data.data, "catalogBody");
     } else {
       // Menampilkan pesan kesalahan jika status bukan 200
-      console.error("Error in getAllCatalog:", data.message);
+      console.log(
+        "Data successfully retrieved in getAllCatalog:",
+        data.message
+      );
     }
   } catch (error) {
     // Menangkap dan menampilkan kesalahan jika ada
