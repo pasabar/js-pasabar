@@ -39,7 +39,7 @@ const getAllCatalog = async () => {
     const data = await response.json();
 
     if (data.status === 200) {
-      displayCatalogData(data.data, 'CatalogDataBody');
+      displayCatalogData(data.data, 'catalogdataBody');
     } else {
       Swal.fire({
         icon: 'error',
