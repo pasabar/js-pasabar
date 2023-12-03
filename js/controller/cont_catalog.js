@@ -26,7 +26,7 @@ const getAllCatalog = async () => {
 
     // URL target
     const targetURL =
-      "https://asia-southeast2-pasabar.cloudfunctions.net/GetAll-Catalog";
+      "https://asia-southeast2-pasabar.cloudfunctions.net/GetAll-dataCatalog";
 
     // Mengatur header untuk permintaan
     const myHeaders = new Headers();
