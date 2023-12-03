@@ -53,7 +53,7 @@ const getAllCatalog = async () => {
     // Memeriksa status respons
     if (data.status === 200) {
       // Memanggil fungsi untuk menangani data katalog
-      displaycatalogData(data.data, "catalogBody");
+      displaycatalogData(data.data, "catalogdataBody");
     } else {
       // Menampilkan pesan kesalahan jika status bukan 200
       // console.log(
@@ -153,16 +153,18 @@ const editcatalog = (nomorid) => {
   window.location.href = `formsupdate.html?nomorid=${nomorid}`;
 };
 
-document.getElementById("catalogBody").addEventListener("click", (event) => {
-  const target = event.target;
-  if (target.classList.contains("edit-link")) {
-    const nomorid = target.getAttribute("data-nomorid");
-    editcatalog(nomorid);
-  } else if (target.classList.contains("delete-link")) {
-    const nomorid = target.getAttribute("data-nomorid");
-    deletecatalogHandler(nomorid);
-  }
-});
+document
+  .getElementById("catalogdataBody")
+  .addEventListener("click", (event) => {
+    const target = event.target;
+    if (target.classList.contains("edit-link")) {
+      const nomorid = target.getAttribute("data-nomorid");
+      editcatalog(nomorid);
+    } else if (target.classList.contains("delete-link")) {
+      const nomorid = target.getAttribute("data-nomorid");
+      deletecatalogHandler(nomorid);
+    }
+  });
 
 const deletecatalogHandler = (nomorid) => {
   if (confirm("Are you sure you want to delete this catalog?")) {
