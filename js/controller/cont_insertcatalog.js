@@ -1,4 +1,4 @@
-const getLoginToken = (cookieName) => {
+const getTokenFromCookies = (cookieName) => {
   const cookies = document.cookie.split(';')
   for (const cookie of cookies) {
     const [name, value] = cookie.trim().split('=')
