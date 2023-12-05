@@ -28,7 +28,7 @@ const searchnomorById = async (nomorId) => {
     return
   }
 
-  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/Update-Catalog' // Replace with your API endpoint
+  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/Update-Catalog'
 
   const myHeaders = new Headers()
   myHeaders.append('Login', token)
@@ -44,14 +44,14 @@ const searchnomorById = async (nomorId) => {
     const response = await fetch(targetURL, requestOptions)
     const data = await response.json()
 
-    if (data.status === 200) {
-      
+    if (response.ok) {
       populateUpdateForm(data.data)
     } else {
-      showUpdateAlert(data.message, 'error')
+      showUpdateAlert(data.message || 'Error fetching data', 'error')
     }
   } catch (error) {
     console.error('Error:', error)
+    showUpdateAlert('Error fetching data', 'error')
   }
 }
 
@@ -63,7 +63,7 @@ const populateUpdateForm = (catalogData) => {
   setValue('NomorIdInput', catalogData.nomorid)
   setValue('TitleInput', catalogData.title)
   setValue('DeskripsiInput', catalogData.description)
-  setValue('LokasiInput', catalogData.description)
+  setValue('LokasiInput', catalogData.lokasi)
   setValue('ImageInput', catalogData.image)
   setValue('StatusInput', catalogData.status)
 
@@ -86,16 +86,18 @@ const updateCatalog = async (event) => {
   myHeaders.append('Login', token)
   myHeaders.append('Content-Type', 'application/json')
 
+  const statusValue = document.getElementById('StatusInput').value === 'active'
+
   const requestOptions = {
     method: 'PUT',
     headers: myHeaders,
     body: JSON.stringify({
-      nomorid: document.getElementById('NomorIdInput').value,
+      nomorid: parseInt(document.getElementById('NomorIdInput').value),
       title: document.getElementById('TitleInput').value,
       description: document.getElementById('DeskripsiInput').value,
       lokasi: document.getElementById('LokasiInput').value,
       image: document.getElementById('ImageInput').value,
-      status: document.getElementById('StatusInput').value,
+      status: statusValue,
     }),
     redirect: 'follow',
   }
@@ -104,14 +106,15 @@ const updateCatalog = async (event) => {
     const response = await fetch(targetURL, requestOptions)
     const data = await response.json()
 
-    if (data.status === 200) {
+    if (response.ok) {
       showUpdateAlert('Berhasil Update Data', 'success')
       window.location.href = 'katalog.html'
     } else {
-      showUpdateAlert(data.message, 'error')
+      showUpdateAlert(data.message || 'Error updating data', 'error')
     }
   } catch (error) {
     console.error('Error:', error)
+    showUpdateAlert('Error updating data', 'error')
   }
 }
 
