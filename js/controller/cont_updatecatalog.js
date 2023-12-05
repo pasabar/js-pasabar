@@ -14,21 +14,21 @@ const showUpdateAlert = (message, icon = 'success') => {
     icon: icon,
     text: message,
     showConfirmButton: false,
-    timer: 1500,
+    timer: 100000,
   }).then(() => {
     window.location.href = 'katalog.html'
   })
 }
 
-const searchUpdateById = async (updateId) => {
-  const token = getUpdateTokenFromCookies('UpdateLogin')
+const searchnomorById = async (nomorId) => {
+  const token = getTokenFromCookies('Login')
 
   if (!token) {
     showUpdateAlert('Anda Belum Login', 'error')
     return
   }
 
-  const targetURL = 'https://your-update-api-url/one-update' // Replace with your API endpoint
+  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/Update-Catalog' // Replace with your API endpoint
 
   const myHeaders = new Headers()
   myHeaders.append('Login', token)
@@ -45,6 +45,7 @@ const searchUpdateById = async (updateId) => {
     const data = await response.json()
 
     if (data.status === 200) {
+      
       populateUpdateForm(data.data)
     } else {
       showUpdateAlert(data.message, 'error')
@@ -68,10 +69,10 @@ const populateUpdateForm = (catalogData) => {
   document.getElementById('updateForm').style.display = 'block'
 }
 
-const updateUpdate = async (event) => {
+const updateCatalog = async (event) => {
   event.preventDefault()
 
-  const token = getTokenFromCookies('UpdateLogin')
+  const token = getTokenFromCookies('Login')
 
   if (!token) {
     showUpdateAlert('Anda Belum Login', 'error')
@@ -112,4 +113,4 @@ const updateUpdate = async (event) => {
   }
 }
 
-document.getElementById('updateForm').addEventListener('submit', updateUpdate)
+document.getElementById('updateForm').addEventListener('submit', updateCatalog)
