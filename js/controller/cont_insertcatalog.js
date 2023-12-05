@@ -40,6 +40,7 @@ const insertCatalog = async (event) => {
     body: JSON.stringify({
       nomorid: parseInt(document.getElementById('newNomorID').value),
       title: document.getElementById('newTitle').value,
+      lokasi: document.getElementById('newLokasi').value,
       description: document.getElementById('newDeskripsi').value,
       image: document.getElementById('newImage').value,
       status: document.getElementById('newStatus').value === 'active' ? true : false,

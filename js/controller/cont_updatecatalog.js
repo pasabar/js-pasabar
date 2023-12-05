@@ -63,6 +63,7 @@ const populateUpdateForm = (catalogData) => {
   setValue('NomorIdInput', catalogData.nomorid)
   setValue('TitleInput', catalogData.title)
   setValue('DeskripsiInput', catalogData.description)
+  setValue('LokasiInput', catalogData.description)
   setValue('ImageInput', catalogData.image)
   setValue('StatusInput', catalogData.status)
 
@@ -92,6 +93,7 @@ const updateCatalog = async (event) => {
       nomorid: document.getElementById('NomorIdInput').value,
       title: document.getElementById('TitleInput').value,
       description: document.getElementById('DeskripsiInput').value,
+      lokasi: document.getElementById('LokasiInput').value,
       image: document.getElementById('ImageInput').value,
       status: document.getElementById('StatusInput').value,
     }),

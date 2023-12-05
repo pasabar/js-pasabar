@@ -145,6 +145,7 @@ const displayCatalogData = (catalogData, tableBodyId) => {
         <td class="px-4 py-3">${item.nomorid}</td>
         <td class="px-4 py-3">${item.title}</td>
         <td class="px-4 py-3">${item.description}</td>
+        <td class="px-4 py-3">${item.lokasi}</td>
         <td class="px-4 py-3">
           <img src="${
             item.image
