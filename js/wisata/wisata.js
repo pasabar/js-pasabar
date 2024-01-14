@@ -9,7 +9,7 @@ const getTokenFromCookies = (cookieName) => {
   return null
 }
 
-const getAllCatalog = async () => {
+const GetAllWisata = async () => {
   const token = getTokenFromCookies('Login')
 
   if (!token) {
@@ -23,7 +23,7 @@ const getAllCatalog = async () => {
     return
   }
 
-  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/GetAll-dataCatalog'
+  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/GetAllWisata'
 
   const myHeaders = new Headers()
   myHeaders.append('Login', token)
@@ -39,7 +39,7 @@ const getAllCatalog = async () => {
     const data = await response.json()
 
     if (data.status === true) {
-      displayCatalogData(data.data, 'CatalogDataBody')
+      displayWisataData(data.data, 'WisataDataBody')
     } else {
       Swal.fire({
         icon: 'error',
@@ -52,7 +52,7 @@ const getAllCatalog = async () => {
   }
 }
 
-const deleteCatalog = async (nomorId) => {
+const deleteWisata = async (nomorId) => {
   const token = getTokenFromCookies('Login')
 
   if (!token) {
@@ -60,7 +60,7 @@ const deleteCatalog = async (nomorId) => {
     return
   }
 
-  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/Delete-Catalog'
+  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/DeleteWisata'
 
   const myHeaders = new Headers()
   myHeaders.append('Login', token)
@@ -81,9 +81,9 @@ const deleteCatalog = async (nomorId) => {
       Swal.fire({
         icon: 'success',
         title: 'Success',
-        text: 'catalog deleted successfully!',
+        text: 'data wisata deleted successfully!',
       }).then(() => {
-        getAllEmployees()
+        GetAllWisata()
       })
     } else {
       Swal.fire({
@@ -98,7 +98,7 @@ const deleteCatalog = async (nomorId) => {
 }
 
 // Function to handle the delete confirmation
-const deleteCatalogHandler = (nomorId) => {
+const deleteWisataHandler = (nomorId) => {
   Swal.fire({
     title: 'Are you sure?',
     text: "You won't be able to revert this!",
@@ -109,33 +109,33 @@ const deleteCatalogHandler = (nomorId) => {
     confirmButtonText: 'Yes, delete it!',
   }).then((result) => {
     if (result.isConfirmed) {
-      deleteCatalog(nomorId)
+      deleteWisata(nomorId)
     }
   })
 }
 
-const editCatalog = (nomorId) => {
-  window.location.href = `formedit_catalog.html?nomorid=${nomorId}`
+const editWisata = (nomorId) => {
+  window.location.href = `formedit_wisata.html?nomorid=${nomorId}`
 }
 // Event listener to handle clicks on the table
-document.getElementById('CatalogDataBody').addEventListener('click', (event) => {
+document.getElementById('WisataDataBody').addEventListener('click', (event) => {
   const target = event.target
   if (target.classList.contains('edit-link')) {
     const nomorId = parseInt(target.getAttribute('data-nomorid'))
-    editCatalog(nomorId)
+    editWisata(nomorId)
   } else if (target.classList.contains('delete-link')) {
     const nomorId = parseInt(target.getAttribute('data-nomorid'))
-    deleteCatalogHandler(nomorId)
+    deleteWisataHandler(nomorId)
   }
 })
 
-const displayCatalogData = (catalogData, tableBodyId) => {
-  const catalogDataBody = document.getElementById(tableBodyId)
+const displayWisataData = (wisataData, tableBodyId) => {
+  const wisataDataBody = document.getElementById(tableBodyId)
 
-  catalogDataBody.innerHTML = ''
+  wisataDataBody.innerHTML = ''
 
-  if (catalogData && catalogData.length > 0) {
-    catalogData.forEach((item) => {
+  if (wisataData && wisataData.length > 1) {
+    wisataData.forEach((item) => {
       const newRow = document.createElement('tr')
       newRow.innerHTML = `
         <td class="px-4 py-3">${item.nomorid}</td>
@@ -152,12 +152,12 @@ const displayCatalogData = (catalogData, tableBodyId) => {
         </td>
       `
 
-      catalogDataBody.appendChild(newRow)
+      wisataDataBody.appendChild(newRow)
     })
   } else {
-    catalogDataBody.innerHTML = `<tr><td colspan="6">No catalog data found.</td></tr>`
+    wisataDataBody.innerHTML = `<tr><td colspan="6">No catalog data found.</td></tr>`
   }
 }
 
 // Initial fetch of all catalogs
-getAllCatalog()
+GetAllWisata()
