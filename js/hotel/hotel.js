@@ -9,7 +9,7 @@ const getTokenFromCookies = (cookieName) => {
   return null
 }
 
-const GetAllWisata = async () => {
+const GetAllHotel = async () => {
   const token = getTokenFromCookies('Login')
 
   if (!token) {
@@ -23,7 +23,7 @@ const GetAllWisata = async () => {
     return
   }
 
-  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/GetAllWisata'
+  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/GetAll-Hotel'
 
   const myHeaders = new Headers()
   myHeaders.append('Login', token)
@@ -39,7 +39,7 @@ const GetAllWisata = async () => {
     const data = await response.json()
 
     if (data.status === true) {
-      displayWisataData(data.data, 'WisataDataBody')
+      displayHotelData(data.data, 'HotelDataBody')
     } else {
       Swal.fire({
         icon: 'error',
@@ -52,7 +52,7 @@ const GetAllWisata = async () => {
   }
 }
 
-const deleteWisata = async (nomorId) => {
+const deleteHotel = async (nomorId) => {
   const token = getTokenFromCookies('Login')
 
   if (!token) {
@@ -60,7 +60,7 @@ const deleteWisata = async (nomorId) => {
     return
   }
 
-  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/DeleteWisata'
+  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/Delete-Hotel'
 
   const myHeaders = new Headers()
   myHeaders.append('Login', token)
@@ -81,9 +81,9 @@ const deleteWisata = async (nomorId) => {
       Swal.fire({
         icon: 'success',
         title: 'Success',
-        text: 'data wisata deleted successfully!',
+        text: 'data hotel deleted successfully!',
       }).then(() => {
-        GetAllWisata()
+        GetAllHotel()
       })
     } else {
       Swal.fire({
@@ -98,7 +98,7 @@ const deleteWisata = async (nomorId) => {
 }
 
 // Function to handle the delete confirmation
-const deleteWisataHandler = (nomorId) => {
+const deleteHotelHandler = (nomorId) => {
   Swal.fire({
     title: 'Are you sure?',
     text: "You won't be able to revert this!",
@@ -109,33 +109,33 @@ const deleteWisataHandler = (nomorId) => {
     confirmButtonText: 'Yes, delete it!',
   }).then((result) => {
     if (result.isConfirmed) {
-      deleteWisata(nomorId)
+      deleteHotel(nomorId)
     }
   })
 }
 
-const editWisata = (nomorId) => {
-  window.location.href = `formedit_wisata.html?nomorid=${nomorId}`
+const editHotel = (nomorId) => {
+  window.location.href = `formedit_hotel.html?nomorid=${nomorId}`
 }
 // Event listener to handle clicks on the table
-document.getElementById('WisataDataBody').addEventListener('click', (event) => {
+document.getElementById('HotelDataBody').addEventListener('click', (event) => {
   const target = event.target
   if (target.classList.contains('edit-link')) {
     const nomorId = parseInt(target.getAttribute('data-nomorid'))
-    editWisata(nomorId)
+    editHotel(nomorId)
   } else if (target.classList.contains('delete-link')) {
     const nomorId = parseInt(target.getAttribute('data-nomorid'))
-    deleteWisataHandler(nomorId)
+    deleteHotelHandler(nomorId)
   }
 })
 
-const displayWisataData = (wisataData, tableBodyId) => {
-  const wisataDataBody = document.getElementById(tableBodyId)
+const displayHotelData = (hotelData, tableBodyId) => {
+  const hotelDataBody = document.getElementById(tableBodyId)
 
-  wisataDataBody.innerHTML = ''
+  hotelDataBody.innerHTML = ''
 
-  if (wisataData && wisataData.length > 1) {
-    wisataData.forEach((item) => {
+  if (hotelData && hotelData.length > 1) {
+    hotelData.forEach((item) => {
       const newRow = document.createElement('tr')
       newRow.innerHTML = `
         <td class="px-4 py-3">${item.nomorid}</td>
@@ -152,12 +152,12 @@ const displayWisataData = (wisataData, tableBodyId) => {
         </td>
       `
 
-      wisataDataBody.appendChild(newRow)
+      hotelDataBody.appendChild(newRow)
     })
   } else {
-    wisataDataBody.innerHTML = `<tr><td colspan="6">No catalog data found.</td></tr>`
+    hotelDataBody.innerHTML = `<tr><td colspan="6">No catalog data found.</td></tr>`
   }
 }
 
 // Initial fetch of all catalogs
-GetAllWisata()
+GetAllHotel()
