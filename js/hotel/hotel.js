@@ -155,7 +155,7 @@ const displayHotelData = (hotelData, tableBodyId) => {
       hotelDataBody.appendChild(newRow)
     })
   } else {
-    hotelDataBody.innerHTML = `<tr><td colspan="6">No catalog data found.</td></tr>`
+    hotelDataBody.innerHTML = `<tr><td colspan="6">No hotel data found.</td></tr>`
   }
 }
 

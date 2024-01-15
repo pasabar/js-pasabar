@@ -155,7 +155,7 @@ const displayRestaurantData = (restaurantData, tableBodyId) => {
       restaurantDataBody.appendChild(newRow)
     })
   } else {
-    restaurantDataBody.innerHTML = `<tr><td colspan="6">No catalog data found.</td></tr>`
+    restaurantDataBody.innerHTML = `<tr><td colspan="6">No restaurant data found.</td></tr>`
   }
 }
 

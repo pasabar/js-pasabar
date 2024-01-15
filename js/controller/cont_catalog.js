@@ -83,7 +83,7 @@ const deleteCatalog = async (nomorId) => {
         title: 'Success',
         text: 'catalog deleted successfully!',
       }).then(() => {
-        getAllEmployees()
+        getAllCatalog()   
       })
     } else {
       Swal.fire({

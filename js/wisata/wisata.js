@@ -155,7 +155,7 @@ const displayWisataData = (wisataData, tableBodyId) => {
       wisataDataBody.appendChild(newRow)
     })
   } else {
-    wisataDataBody.innerHTML = `<tr><td colspan="6">No catalog data found.</td></tr>`
+    wisataDataBody.innerHTML = `<tr><td colspan="6">No hotel data found.</td></tr>`
   }
 }
 
