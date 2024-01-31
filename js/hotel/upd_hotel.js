@@ -55,7 +55,7 @@ const updateHotel = async (event) => {
 
   try {
     const response = await fetch(targetURL, requestOptions);
-    const data = await response.json();
+    const datah = await response.json();
 
     if (response.ok) {
       showUpdateAlert("Berhasil Update Data", "success");
