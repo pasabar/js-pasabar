@@ -147,7 +147,7 @@ const displayHotelData = (hotelData, tableBodyId) => {
         </td>
         <td class="px-4 py-3">${item.status ? 'Active' : 'Inactive'}</td>
         <td class="px-4 py-3">
-          <a href="formedit_hotel.html?_id"${item._id}">Edit</a>
+          <a href="formedit_hotel.html?_id=${item._id}">Edit</a>
           <a href="#" class="delete-link" data-nomorid="${item.nomorid}">Delete</a>
         </td>
       `
