@@ -72,7 +72,7 @@ const updateWisata = async (event) => {
 document.getElementById("updateForm").addEventListener("submit", updateWisata);
 
 // Fetch data from the API using a GET request
-const apiUrl = "https://asia-southeast2-pasabar.cloudfunctions.net/GetOneRestoran";
+const apiUrl = "https://asia-southeast2-pasabar.cloudfunctions.net/GetOneWisata";
 const params = new URLSearchParams(window.location.search);
 const wisataId = params.get("_id");
 
