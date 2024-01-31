@@ -1,24 +1,49 @@
-const getAllHotel = async () => {
-  const targetURL =
-    "https://asia-southeast2-pasabar.cloudfunctions.net/GetAllHotelNL";
+const openModal = (data) => {
+  const modal = document.getElementById("myModal");
+  const modalTitle = modal.querySelector("#modalTitle");
+  const modalTicket = modal.querySelector("#modalTicket");
+  const modalParkir = modal.querySelector("#modalParkir");
+  const modalJarak = modal.querySelector("#modalJarak");
+  const modalPemandangan = modal.querySelector("#modalPemandangan");
+  const modalKelebihan = modal.querySelector("#modalKelebihan");
+  const modalKekurangan = modal.querySelector("#modalKekurangan");
 
+  // Populate the modal with the provided data
+  modalTitle.textContent = data.title;
+  modalTicket.textContent = `Ticket: ${data.ticket}`;
+  modalParkir.textContent = `Parkir: ${data.parkir}`;
+  modalJarak.textContent = `Jarak: ${data.jarak}`;
+  modalPemandangan.textContent = `Pemandangan: ${data.pemandangan}`;
+  modalKelebihan.textContent = `Kelebihan: ${data.kelebihan}`;
+  modalKekurangan.textContent = `Kekurangan: ${data.kekurangan}`;
+  
+  modal.style.display = "block";
+};
+
+// Define the closeModal function
+const closeModal = (modalId) => {
+  const modal = document.getElementById(modalId);
+  modal.style.display = "none";
+};
+
+// Function to create hotel items and populate the hotel body
+const populateHotelBody = async () => {
+  const hotelbody = document.getElementById("hotelbody");
   try {
-    // Fetch data from the API
-    const response = await fetch(targetURL);
-
-    // Check if the response is successful (status code 200)
+    // Fetch hotel data from the API
+    const response = await fetch("https://asia-southeast2-pasabar.cloudfunctions.net/GetAllHotelNL");
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
-    // Parse the JSON response into an object
     const data = await response.json();
-
-    // Check if the parsed data is an array
+    
+    // Check if the data is an array
     if (Array.isArray(data.data)) {
-      // Process each catalog item
+    }
+      
+      
+      // Create hotel items and add click event listeners
       data.data.forEach((item) => {
-        // Create a new catalog item element
         const newHotelItem = document.createElement("div");
         newHotelItem.classList.add(
           "w-full",
@@ -29,13 +54,12 @@ const getAllHotel = async () => {
           "fadeInUp",
           "group",
           "mb-10"
-        );
-        newHotelItem.setAttribute("data-wow-delay", ".1s");
-
-        // Populate the catalog item with data
-        newHotelItem.innerHTML = `
-      <div class="mb-8 overflow-hidden rounded-[5px]">
-        <a href="blog-details.html" class="block">
+          );
+          newHotelItem.setAttribute("data-wow-delay", ".1s");
+          
+          newHotelItem.innerHTML = `
+          <div class="mb-8 overflow-hidden rounded-[5px]">
+        <a href="#">
           <img src="${item.image}" alt="image" class="w-full transition group-hover:rotate-6 group-hover:scale-125" />
         </a>
       </div>
@@ -52,20 +76,30 @@ const getAllHotel = async () => {
           ${item.description}
         </p>
       </div>`;
-
-        // Append the new catalog item to the catalog body
-        const hotelbody = document.getElementById("hotelbody");
-        hotelbody.appendChild(newHotelItem);
+          
+          // Add click event listener to each hotel item
+          newHotelItem.addEventListener("click", async () => {
+            // Manually populate modal with specific details
+            const manualData = {
+              title: item.title,
+              ticket: "15 ribu",
+              parkir: "5 ribu mobil, lumayan luas",
+              jarak: "20km dari Bandung",
+              pemandangan: "Indah dan ada samudera awan",
+              kelebihan: "Perjalanan untuk mencapai puncak lumayan mudah dan santai",
+              kekurangan: "Di gunung ini populasi babi banyak, jadi banyak babi di jalurnya"
+            };
+            
+        openModal(manualData);
       });
-    } else {
-      console.error("Data is not an array:", data);
-      // Handle the case where data is not an array (e.g., unexpected API response format)
-    }
+
+      // Append the new catalog item to the catalog body
+      hotelbody.appendChild(newHotelItem);
+    });
   } catch (error) {
-    console.error("Error fetching Hotel data:", error);
-    // Handle network errors or other exceptions
+    console.error("Error fetching hotel data:", error);
   }
 };
 
-// Call the function to fetch and display the catalog data
-getAllHotel();
+// Call the function to populate the hotel body
+populateHotelBody();
