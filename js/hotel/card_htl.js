@@ -16,7 +16,7 @@ const openModal = (data) => {
   modalPemandangan.textContent = `Pemandangan: ${data.pemandangan}`;
   modalKelebihan.textContent = `Kelebihan: ${data.kelebihan}`;
   modalKekurangan.textContent = `Kekurangan: ${data.kekurangan}`;
-  
+
   modal.style.display = "block";
 };
 
@@ -31,33 +31,34 @@ const populateHotelBody = async () => {
   const hotelbody = document.getElementById("hotelbody");
   try {
     // Fetch hotel data from the API
-    const response = await fetch("https://asia-southeast2-pasabar.cloudfunctions.net/GetAllHotelNL");
+    const response = await fetch(
+      "https://asia-southeast2-pasabar.cloudfunctions.net/GetAllHotelNL"
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    
+
     // Check if the data is an array
     if (Array.isArray(data.data)) {
     }
-      
-      
-      // Create hotel items and add click event listeners
-      data.data.forEach((item) => {
-        const newHotelItem = document.createElement("div");
-        newHotelItem.classList.add(
-          "w-full",
-          "px-4",
-          "md:w-1/2",
-          "lg:w-1/3",
-          "wow",
-          "fadeInUp",
-          "group",
-          "mb-10"
-          );
-          newHotelItem.setAttribute("data-wow-delay", ".1s");
-          
-          newHotelItem.innerHTML = `
+
+    // Create hotel items and add click event listeners
+    data.data.forEach((item) => {
+      const newHotelItem = document.createElement("div");
+      newHotelItem.classList.add(
+        "w-full",
+        "px-4",
+        "md:w-1/2",
+        "lg:w-1/3",
+        "wow",
+        "fadeInUp",
+        "group",
+        "mb-10"
+      );
+      newHotelItem.setAttribute("data-wow-delay", ".1s");
+
+      newHotelItem.innerHTML = `
           <div class="mb-8 overflow-hidden rounded-[5px]">
         <a href="#">
           <img src="${item.image}" alt="image" class="w-full transition group-hover:rotate-6 group-hover:scale-125" />
@@ -76,20 +77,22 @@ const populateHotelBody = async () => {
           ${item.description}
         </p>
       </div>`;
-          
-          // Add click event listener to each hotel item
-          newHotelItem.addEventListener("click", async () => {
-            // Manually populate modal with specific details
-            const manualData = {
-              title: item.title,
-              ticket: "15 ribu",
-              parkir: "5 ribu mobil, lumayan luas",
-              jarak: "20km dari Bandung",
-              pemandangan: "Indah dan ada samudera awan",
-              kelebihan: "Perjalanan untuk mencapai puncak lumayan mudah dan santai",
-              kekurangan: "Di gunung ini populasi babi banyak, jadi banyak babi di jalurnya"
-            };
-            
+
+      // Add click event listener to each hotel item
+      newHotelItem.addEventListener("click", async () => {
+        // Manually populate modal with specific details
+        const manualData = {
+          title: item.title,
+          ticket: "15 ribu",
+          parkir: "5 ribu mobil, lumayan luas",
+          jarak: "20km dari Bandung",
+          pemandangan: "Indah dan ada samudera awan",
+          kelebihan:
+            "Perjalanan untuk mencapai puncak lumayan mudah dan santai",
+          kekurangan:
+            "Di gunung ini populasi babi banyak, jadi banyak babi di jalurnya",
+        };
+
         openModal(manualData);
       });
 
