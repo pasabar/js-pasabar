@@ -28,7 +28,7 @@ const insertCatalog = async (event) => {
     return
   }
 
-  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/Insert-Catalog'
+  const targetURL = 'https://asia-southeast2-pasabar.cloudfunctions.net/GetNomorid'
 
   const myHeaders = new Headers()
   myHeaders.append('Login', token)
