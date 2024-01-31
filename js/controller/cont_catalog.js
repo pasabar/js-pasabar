@@ -114,15 +114,15 @@ const deleteCatalogHandler = (nomorId) => {
   })
 }
 
-const editCatalog = (nomorId) => {
-  window.location.href = `formedit_catalog.html?nomorid=${nomorId}`
+const editCatalog = (_id) => {
+  window.location.href = `formedit_catalog.html?_id=${_id}`
 }
 // Event listener to handle clicks on the table
 document.getElementById('CatalogDataBody').addEventListener('click', (event) => {
   const target = event.target
   if (target.classList.contains('edit-link')) {
-    const nomorId = parseInt(target.getAttribute('data-nomorid'))
-    editCatalog(nomorId)
+    const _id = parseInt(target.getAttribute('data-_id'))
+    editCatalog(_id)
   } else if (target.classList.contains('delete-link')) {
     const nomorId = parseInt(target.getAttribute('data-nomorid'))
     deleteCatalogHandler(nomorId)
@@ -147,7 +147,7 @@ const displayCatalogData = (catalogData, tableBodyId) => {
         </td>
         <td class="px-4 py-3">${item.status ? 'Active' : 'Inactive'}</td>
         <td class="px-4 py-3">
-          <a href="#" class="edit-link" data-nomorid="${item.nomorid}">Edit</a>
+          <a href="formedit_catalog.html?_id=${item._id}">Edit</a>
           <a href="#" class="delete-link" data-nomorid="${item.nomorid}">Delete</a>
         </td>
       `
