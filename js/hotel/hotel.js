@@ -114,15 +114,15 @@ const deleteHotelHandler = (nomorId) => {
   })
 }
 
-const editHotel = (nomorId) => {
-  window.location.href = `formedit_hotel.html?nomorid=${nomorId}`
+const editHotel = (_id) => {
+  window.location.href = `formedit_hotel.html?_id=${_id}`
 }
 // Event listener to handle clicks on the table
 document.getElementById('HotelDataBody').addEventListener('click', (event) => {
   const target = event.target
   if (target.classList.contains('edit-link')) {
-    const nomorId = parseInt(target.getAttribute('data-nomorid'))
-    editHotel(nomorId)
+    const _id = parseInt(target.getAttribute('data-_id'))
+    editHotel(_id)
   } else if (target.classList.contains('delete-link')) {
     const nomorId = parseInt(target.getAttribute('data-nomorid'))
     deleteHotelHandler(nomorId)
@@ -147,7 +147,7 @@ const displayHotelData = (hotelData, tableBodyId) => {
         </td>
         <td class="px-4 py-3">${item.status ? 'Active' : 'Inactive'}</td>
         <td class="px-4 py-3">
-          <a href="#" class="edit-link" data-nomorid="${item.nomorid}">Edit</a>
+          <a href="formedit_hotel.html?_id"${item._id}">Edit</a>
           <a href="#" class="delete-link" data-nomorid="${item.nomorid}">Delete</a>
         </td>
       `

@@ -114,15 +114,15 @@ const deleteWisataHandler = (nomorId) => {
   })
 }
 
-const editWisata = (nomorId) => {
-  window.location.href = `formedit_wisata.html?nomorid=${nomorId}`
+const editWisata = (_id) => {
+  window.location.href = `formedit_wisata.html?_id=${_id}`
 }
 // Event listener to handle clicks on the table
 document.getElementById('WisataDataBody').addEventListener('click', (event) => {
   const target = event.target
   if (target.classList.contains('edit-link')) {
-    const nomorId = parseInt(target.getAttribute('data-nomorid'))
-    editWisata(nomorId)
+    const _id = parseInt(target.getAttribute('data-_id'))
+    editWisata(_id)
   } else if (target.classList.contains('delete-link')) {
     const nomorId = parseInt(target.getAttribute('data-nomorid'))
     deleteWisataHandler(nomorId)
@@ -147,7 +147,7 @@ const displayWisataData = (wisataData, tableBodyId) => {
         </td>
         <td class="px-4 py-3">${item.status ? 'Active' : 'Inactive'}</td>
         <td class="px-4 py-3">
-          <a href="#" class="edit-link" data-nomorid="${item.nomorid}">Edit</a>
+          <a href="formedit_wisata.html?_id="${item._id}">Edit</a>
           <a href="#" class="delete-link" data-nomorid="${item.nomorid}">Delete</a>
         </td>
       `
