@@ -83,10 +83,10 @@ if (hotelId) {
 
   fetch(fullApiUrl)
     .then((response) => response.json())
-    .then((data) => {
-      console.log("API Response:", data);
+    .then((datah) => {
+      console.log("API Response:", datah);
 
-      const hotelData = data.data[0];
+      const hotelData = datah.datah[0];
 
       document.getElementById("NomorIdInput").value = hotelData.nomorid;
       document.getElementById("TitleInput").value = hotelData.title;

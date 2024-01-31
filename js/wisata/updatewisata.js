@@ -72,7 +72,8 @@ const updateWisata = async (event) => {
 document.getElementById("updateForm").addEventListener("submit", updateWisata);
 
 // Fetch data from the API using a GET request
-const apiUrl = "https://asia-southeast2-pasabar.cloudfunctions.net/GetOneWisata";
+const apiUrl =
+  "https://asia-southeast2-pasabar.cloudfunctions.net/GetOneWisata";
 const params = new URLSearchParams(window.location.search);
 const wisataId = params.get("_id");
 
@@ -83,10 +84,10 @@ if (wisataId) {
 
   fetch(fullApiUrl)
     .then((response) => response.json())
-    .then((data) => {
-      console.log("API Response:", data);
+    .then((dataw) => {
+      console.log("API Response:", dataw);
 
-      const wisataData = data.data[0];
+      const wisataData = dataw.dataw[0];
 
       document.getElementById("NomorIdInput").value = wisataData.nomorid;
       document.getElementById("TitleInput").value = wisataData.title;
@@ -102,6 +103,3 @@ if (wisataId) {
       console.error("Error fetching data:", error);
     });
 }
-
-
-

@@ -69,10 +69,13 @@ const updateRestaurant = async (event) => {
   }
 };
 
-document.getElementById("updateForm").addEventListener("submit", updateRestaurant);
+document
+  .getElementById("updateForm")
+  .addEventListener("submit", updateRestaurant);
 
 // Fetch data from the API using a GET request
-const apiUrl = "https://asia-southeast2-pasabar.cloudfunctions.net/GetOneRestoran";
+const apiUrl =
+  "https://asia-southeast2-pasabar.cloudfunctions.net/GetOneRestoran";
 const params = new URLSearchParams(window.location.search);
 const restaurantId = params.get("_id");
 
@@ -83,14 +86,15 @@ if (restaurantId) {
 
   fetch(fullApiUrl)
     .then((response) => response.json())
-    .then((data) => {
-      console.log("API Response:", data);
+    .then((datar) => {
+      console.log("API Response:", datar);
 
-      const restaurantData = data.data[0];
+      const restaurantData = datar.datar[0];
 
       document.getElementById("NomorIdInput").value = restaurantData.nomorid;
       document.getElementById("TitleInput").value = restaurantData.title;
-      document.getElementById("DeskripsiInput").value = restaurantData.description;
+      document.getElementById("DeskripsiInput").value =
+        restaurantData.description;
       document.getElementById("LokasiInput").value = restaurantData.lokasi;
       document.getElementById("ImageInput").value = restaurantData.image;
       document.getElementById("StatusInput").value = restaurantData.status;
