@@ -115,7 +115,7 @@ const deleteRestaurantHandler = (nomorId) => {
 }
 
 const editRestaurant = (nomorId) => {
-  window.location.href = `formedit_restaurant.html?nomorid=${nomorId}`
+  window.location.href = `formedit_res.html?nomorid=${nomorId}`
 }
 // Event listener to handle clicks on the table
 document.getElementById('RestaurantDataBody').addEventListener('click', (event) => {

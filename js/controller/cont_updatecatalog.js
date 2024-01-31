@@ -119,3 +119,4 @@ const updateCatalog = async (event) => {
 }
 
 document.getElementById('updateForm').addEventListener('submit', updateCatalog)
+document.getElementById('updateForm').addEventListener('cancel', updateCatalog)

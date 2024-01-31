@@ -64,3 +64,4 @@ const insertCatalog = async (event) => {
 }
 
 document.getElementById('newCatalogForm').addEventListener('submit', insertCatalog)
+
