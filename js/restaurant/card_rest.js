@@ -21,7 +21,7 @@ const openModal = (data) => {
 };
 
 // Define the closeModal function
-const closeModal = (modalId) => {
+window.closeModal = (modalId) => {
   const modal = document.getElementById(modalId);
   modal.style.display = "none";
 };
@@ -83,14 +83,14 @@ const populateRestaurantBody = async () => {
         // Manually populate modal with specific details
         const manualData = {
           title: item.title,
-          ticket: "15 ribu",
-          parkir: "5 ribu mobil, lumayan luas",
-          jarak: "20km dari Bandung",
-          pemandangan: "Indah dan ada samudera awan",
+          ticket: "harga mulai dari 15k keatas",
+          parkir: "2k motor, 5k mobil, lumayan luas",
+          jarak: "10km dari Bandung",
+          pemandangan: "banyak spot fotonya",
           kelebihan:
-            "Perjalanan untuk mencapai puncak lumayan mudah dan santai",
+            "Tempat makan yang nyaman dan bersih, serta pemandangan yang bagus",
           kekurangan:
-            "Di gunung ini populasi babi banyak, jadi banyak babi di jalurnya",
+            "makanan khusus sunda tidak ada yang lain",
         };
 
         openModal(manualData);

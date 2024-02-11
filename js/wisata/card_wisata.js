@@ -21,7 +21,7 @@ const openModal = (data) => {
 };
 
 // Define the closeModal function
-const closeModal = (modalId) => {
+window.closeModal = (modalId) => {
   const modal = document.getElementById(modalId);
   modal.style.display = "none";
 };

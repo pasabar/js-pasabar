@@ -21,7 +21,7 @@ const openModal = (data) => {
 };
 
 // Define the closeModal function
-const closeModal = (modalId) => {
+window.closeModal = (modalId) => {
   const modal = document.getElementById(modalId);
   modal.style.display = "none";
 };
@@ -83,14 +83,14 @@ const populateHotelBody = async () => {
         // Manually populate modal with specific details
         const manualData = {
           title: item.title,
-          ticket: "15 ribu",
-          parkir: "5 ribu mobil, lumayan luas",
+          ticket: "200k per malam",
+          parkir: "5k untuk 1malam",
           jarak: "20km dari Bandung",
-          pemandangan: "Indah dan ada samudera awan",
+          pemandangan:
+            "Indah sekali bisa liat city light Bandung dari atas hotel",
           kelebihan:
-            "Perjalanan untuk mencapai puncak lumayan mudah dan santai",
-          kekurangan:
-            "Di gunung ini populasi babi banyak, jadi banyak babi di jalurnya",
+            "Fasilitas lengkap, ada kolam renang, gym, dan restoran di dalam hotel",
+          kekurangan: "Kamar mandi agak sempit, tapi masih nyaman kok",
         };
 
         openModal(manualData);
